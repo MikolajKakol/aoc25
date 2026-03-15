@@ -3,4 +3,11 @@ name = "aoc25"
 version = "0.1.0"
 edition = "2024"
 
+[lib]
+name = "aoc25"
+crate-type = ["lib"]
+
 [dependencies]
+aoc-runner = "0.3.0"
+aoc-runner-derive = "0.3.0"
+indoc = "2.0.7"

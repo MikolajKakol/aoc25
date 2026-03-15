@@ -4,6 +4,19 @@ struct Safe {
     zero_hits: isize,
 }
 
+#[aoc(day1, part1)]
+fn part1(input: &str) -> isize {
+    let mut safe = Safe::new(50);
+    let result = safe.part1(input);
+    result
+}
+#[aoc(day1, part2)]
+fn part2(input: &str) -> isize {
+    let mut safe = Safe::new(50);
+    let result = safe.part2(input);
+    result
+}
+
 impl Safe {
     fn new(pin_position: isize) -> Self {
         Safe {
@@ -45,7 +58,6 @@ impl Safe {
         let full_rotations = (dir / LOCK_LEN).abs();
         let relevant_rotation = dir % LOCK_LEN;
         if full_rotations > 0 {
-            dbg!(full_rotations);
             self.zero_hits += full_rotations;
         }
 
@@ -103,18 +115,20 @@ enum Direction {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use indoc::indoc;
 
-    const SAMPLE: &'static str = "L68
-L30
-R48
-L5
-R60
-L55
-L1
-L99
-R14
-L82";
-    const REAL_DATA: &str = include_str!("input01.txt");
+    const SAMPLE: &str = indoc! {"
+        L68
+        L30
+        R48
+        L5
+        R60
+        L55
+        L1
+        L99
+        R14
+        L82
+"};
 
     #[test]
     fn sample_p1() {
@@ -125,27 +139,10 @@ L82";
     }
 
     #[test]
-    fn real_p1() {
-        let mut safe = Safe::new(50);
-        let result = safe.part1(REAL_DATA);
-
-        assert_eq!(result, 1018);
-    }
-    #[test]
     fn sample_p2() {
         let mut safe = Safe::new(50);
         let result = safe.part2(SAMPLE);
 
         assert_eq!(result, 6);
     }
-
-    #[test]
-    fn real_p2() {
-        let mut safe = Safe::new(50);
-        let result = safe.part2(REAL_DATA);
-
-        assert_eq!(result, 5815);
-    }
 }
-
-fn main() {}
